@@ -25,30 +25,28 @@ const mergeSort = (arr) => {
 
         const res = [];
 
-        let num1 = firstHalf.shift();
-        let num2 = secondHalf.shift();
-        let lastNum = 0;
+        let num1Ptr = 0;
+        let num2Ptr = 0;
 
-        while (firstHalf.length > 0 || secondHalf.length > 0) {
+        while (firstHalf.length >= num1Ptr && secondHalf.length >= num2Ptr) {
+          let num1 = firstHalf[num1Ptr];
+          let num2 = secondHalf[num2Ptr];
+
           if (num1 > num2) {
-            res.push(num2);
-            num2 = secondHalf.shift();
-            lastNum = num2;
+            num2 === undefined ? undefined : res.push(num2);
+            num2Ptr++;
           } else {
-            res.push(num1);
-            num1 = firstHalf.shift();
-            lastNum = num1;
+            num1 === undefined ? undefined : res.push(num1);
+            num1Ptr++;
           }
         }
-        res.push(lastNum);
         return res;
       })();
   }
 };
 
-
 const len = 1000;
-const arr = Array.from({ length:  len}, (_, i) => len - i);
+const arr = Array.from({ length: len }, (_, i) => len - i);
 console.log(arr);
 
 console.log(mergeSort(arr));
